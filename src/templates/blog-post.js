@@ -17,10 +17,10 @@ import Seo from "../components/seo"
 
 const BlogPostTemplate = ({ data: { previous, next, post } }) => {
   const featuredImage = {
-    data: post.featuredImage?.node?.localFile?.childImageSharp?.gatsbyImageData,
+    data: post.featuredImage?.node?.gatsbyImage,
     alt: post.featuredImage?.node?.alt || ``,
   }
-
+  console.log(post.featuredImage)
   return (
     <Layout>
       <Seo title={post.title} description={post.excerpt} />
@@ -36,13 +36,13 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
           <p>{post.date}</p>
 
           {/* if we have a featured image for this post let's display it */}
-          {featuredImage?.data && (
-            <GatsbyImage
-              image={featuredImage.data}
-              alt={featuredImage.alt}
-              style={{ marginBottom: 50 }}
-            />
-          )}
+          {/* {featuredImage?.data && ( */}
+          <GatsbyImage
+            image={featuredImage.data}
+            alt={featuredImage.alt}
+            style={{ marginBottom: 50 }}
+          />
+          {/* )} */}
         </header>
 
         {!!post.content && (
