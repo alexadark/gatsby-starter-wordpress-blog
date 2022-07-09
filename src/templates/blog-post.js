@@ -17,9 +17,12 @@ import Seo from "../components/seo"
 
 const BlogPostTemplate = ({ data: { previous, next, post } }) => {
   const featuredImage = {
-    data: post.featuredImage?.node?.localFile?.childImageSharp?.gatsbyImageData,
+    data: post.featuredImage?.node?.gatsbyImage,
+    // data: post.featuredImage?.node?.localFile.childImageSharp.gatsbyImageData,
     alt: post.featuredImage?.node?.alt || ``,
   }
+
+  console.log("image", featuredImage.data)
 
   return (
     <Layout>
@@ -104,15 +107,16 @@ export const pageQuery = graphql`
       featuredImage {
         node {
           altText
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                quality: 100
-                placeholder: TRACED_SVG
-                layout: FULL_WIDTH
-              )
-            }
-          }
+          gatsbyImage(layout: FULL_WIDTH, width: 10, aspectRatio: 1.5)
+          # localFile {
+          #   childImageSharp {
+          #     gatsbyImageData(
+          #       quality: 100
+          #       placeholder: TRACED_SVG
+          #       layout: FULL_WIDTH
+          #     )
+          #   }
+          # }
         }
       }
     }
